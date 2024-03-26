@@ -1,38 +1,76 @@
 <template>
-  <v-container>
-    <h2>Registro de Asistencia</h2>
-    <v-data-table
-      :headers="headers"
-      :items="registros"
-      class="elevation-1"
-    >
-      <template v-slot:items="props">
-        <td>{{ props.item.nombre }}</td>
-        <td>{{ props.item.fecha }}</td>
-        <td>{{ props.item.horaEntrada }}</td>
-        <td>{{ props.item.horaSalida }}</td>
-      </template>
-    </v-data-table>
-  </v-container>
+  <v-card>
+    <v-toolbar flat>
+      <v-toolbar-title><strong style="color:#2cbcb4">Registro</strong></v-toolbar-title>
+    </v-toolbar>
+    <v-divider />
+    <v-card-text>
+      <v-container>
+        <v-btn class="mx-2" fab dark small color="primary">
+          <v-icon dark>
+            mdi-plus
+          </v-icon>
+        </v-btn>
+        <v-data-table
+          :headers="headers"
+          :items="products"
+        >
+          <template #[`item.price`]="{item}">
+            <span>S/.{{ item.price }}</span>
+          </template>
+          <template #[`item.updatedAt`]="{item}">
+            <span>{{ fech(item.updatedAt) }}</span>
+          </template>
+        </v-data-table>
+      </v-container>
+    </v-card-text>
+  </v-card>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'RegistroAsistencia',
+  components: {
+  },
   data() {
     return {
-      registros: [
-        { nombre: 'Juan', fecha: '2024-03-24', horaEntrada: '09:00', horaSalida: '18:00' },
-        { nombre: 'María', fecha: '2024-03-24', horaEntrada: '09:15', horaSalida: '17:45' },
-        { nombre: 'María', fecha: '2024-03-24', horaEntrada: '09:15', horaSalida: '17:45' }
-      ],
+      products: [],
       headers: [
-        { text: 'Nombre', value: 'nombre' },
-        { text: 'Fecha', value: 'fecha' },
-        { text: 'Hora de Entrada', value: 'horaEntrada' },
-        { text: 'Hora de Salida', value: 'horaSalida' }
-      ]
+        { text: 'Numero', value: 'id'},
+        { text: 'Nombre', value: 'title' },
+        { text: 'Descripcion', value: 'description' },
+        { text: 'Precio', value: 'price' },
+        { text: 'Fecha Actualizado', value: 'updatedAt' }
+      ],
     }
+  },
+  beforeMount () {
+    this.buscar()
+  },
+  methods: {
+    buscar(){
+      axios.get('https://api.escuelajs.co/api/v1/products').then(
+        response => {
+          this.products = response.data
+        }
+      )
+    },
+    // fecha
+    fech (fi) {
+      const date = new Date(fi)
+      const year = date.getFullYear()
+      let month = date.getMonth()
+      let dt = date.getDate()
+      month++
+      if (dt < 10) {
+        dt = '0' + dt
+      }
+      if (month < 10) {
+        month = '0' + month
+      }
+      return `${dt}/${month}/${year}`
+    },
   }
 }
 </script>

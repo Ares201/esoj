@@ -12,6 +12,8 @@
           </v-icon>
         </v-btn>
         <v-data-table
+          height="500px"
+          fixed-header
           :headers="headers"
           :items="products"
         >
@@ -26,7 +28,6 @@
     </v-card-text>
   </v-card>
 </template>
-
 <script>
 import axios from 'axios'
 export default {
@@ -50,11 +51,10 @@ export default {
   },
   methods: {
     buscar(){
-      axios.get('https://api.escuelajs.co/api/v1/products').then(
-        response => {
+      axios.get('https://api.escuelajs.co/api/v1/products').then(response => {
           this.products = response.data
-        }
-      )
+          console.log(this.products[0].images[0])
+        })
     },
     // fecha
     fech (fi) {

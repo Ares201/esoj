@@ -1,5 +1,7 @@
 <template>
-  <v-dialog v-model="mostrar" max-width="500px">
+  <!-- Utilizar el id="app" data-app -->
+  <div id="app" data-app> 
+    <v-dialog :value="mostrar" max-width="500px">
     <v-card>
       <v-card-title class="headline">Agregar Nuevo Registro de Asistencia</v-card-title>
       <v-card-text>
@@ -16,17 +18,17 @@
       </v-card-actions>
     </v-card>
   </v-dialog>
+  </div>
 </template>
 
 <script>
 export default {
-  name: 'ModalAgregarRegistro',
   props: {
-    value: Boolean
+    dialogF: {type: Boolean, default: false}
   },
   data() {
     return {
-      mostrar: this.value,
+      mostrar: false,
       nombre: '',
       fecha: '',
       horaEntrada: '',
@@ -34,13 +36,13 @@ export default {
     }
   },
   watch: {
-    value(newVal) {
-      this.mostrar = newVal;
+    dialogF (val) {
+      this.mostrar = val
     }
   },
   methods: {
     cerrar() {
-      this.$emit('update:value', false); // Emitir evento para cerrar el modal
+      this.$emit('cerrarForm', false); // Emitir evento para cerrar el modal
     },
     agregarRegistro() {
       // Lógica para agregar un nuevo registro

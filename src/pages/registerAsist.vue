@@ -6,12 +6,16 @@
     <v-divider />
     <v-card-text>
       <v-container>
-        <v-btn class="mx-2" fab dark small color="primary">
+        <register
+          :dialogF="dialog"
+          @cerrarForm="dialog=false"
+        />
+        <v-btn class="mx-2" fab dark small color="primary" @click=" dialog = !dialog">
           <v-icon dark>
             mdi-plus
           </v-icon>
         </v-btn>
-        <v-data-table
+        <!-- <v-data-table
           height="500px"
           fixed-header
           :headers="headers"
@@ -23,19 +27,22 @@
           <template #[`item.updatedAt`]="{item}">
             <span>{{ fech(item.updatedAt) }}</span>
           </template>
-        </v-data-table>
+        </v-data-table> -->
       </v-container>
     </v-card-text>
   </v-card>
 </template>
 <script>
 import axios from 'axios'
+import register from '@/components/addRegister.vue'
 export default {
   name: 'RegistroAsistencia',
   components: {
+    register
   },
   data() {
     return {
+      dialog: false,
       products: [],
       headers: [
         { text: 'Numero', value: 'id'},

@@ -15,7 +15,7 @@
             mdi-plus
           </v-icon>
         </v-btn>
-        <!-- <v-data-table
+        <v-data-table
           height="500px"
           fixed-header
           :headers="headers"
@@ -25,9 +25,9 @@
             <span>S/.{{ item.price }}</span>
           </template>
           <template #[`item.updatedAt`]="{item}">
-            <span>{{ fech(item.updatedAt) }}</span>
+            <span>{{ fech(item.updatedAt)}}</span>
           </template>
-        </v-data-table> -->
+        </v-data-table>
       </v-container>
     </v-card-text>
   </v-card>
@@ -57,11 +57,14 @@ export default {
     this.buscar()
   },
   methods: {
-    buscar(){
-      axios.get('https://api.escuelajs.co/api/v1/products').then(response => {
-          this.products = response.data
-          console.log(this.products[0].images[0])
-        })
+    async buscar () {
+      try {
+        const response = await axios.get('https://api.escuelajs.co/api/v1/products')
+        this.products = response.data
+        console.log(response, 'Data producto')
+      } catch (error) {
+        console.log(error, 'VERIFICAR EL SIGUIENTE ERROR')
+      }
     },
     // fecha
     fech (fi) {

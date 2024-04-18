@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import App from './pages/CoffeList.vue'
+import App from './pages/starkNetWork.vue'
 import vuetify from './plugins/vuetify'
 
 Vue.config.productionTip = false

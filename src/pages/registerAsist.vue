@@ -25,7 +25,7 @@
             <span>S/.{{ item.price }}</span>
           </template>
           <template #[`item.updatedAt`]="{item}">
-            <span>{{ fech(item.updatedAt)}}</span>
+            <span>{{ fech(item.updatedAt) }}</span>
           </template>
         </v-data-table>
       </v-container>
@@ -44,12 +44,13 @@ export default {
     return {
       dialog: false,
       products: [],
+      name: 'Cervera',
       headers: [
         { text: 'Numero', value: 'id'},
         { text: 'Nombre', value: 'title' },
         { text: 'Descripcion', value: 'description' },
         { text: 'Precio', value: 'price' },
-        { text: 'Fecha Actualizado', value: 'updatedAt' }
+        { text: 'Fecha Actualizado', value: '' }
       ],
     }
   },
@@ -84,7 +85,6 @@ export default {
   }
 }
 </script>
-
 <style>
 /* Estilos adicionales según sea necesario */
 </style>

@@ -1,11 +1,9 @@
 <template>
-  <!-- Utilizar el id="app" data-app -->
   <div id="app" data-app> 
     <v-dialog :value="mostrar" max-width="500px">
     <v-card>
       <v-card-title class="headline">Agregar Nuevo Registro de Asistencia</v-card-title>
       <v-card-text>
-        <!-- Aquí van los campos del formulario para agregar un nuevo registro -->
         <v-text-field label="Nombre" v-model="nombre" outlined></v-text-field>
         <v-text-field label="Fecha" v-model="fecha" outlined></v-text-field>
         <v-text-field label="Hora de Entrada" v-model="horaEntrada" outlined></v-text-field>

@@ -1,10 +1,14 @@
-import Vue from 'vue'
-import App from './pages/starkNetWork.vue'
-import vuetify from './plugins/vuetify'
+import Vue from 'vue';
+import App from './pages/pruductos.vue'
+import Vuetify from 'vuetify';
+import 'vuetify/dist/vuetify.min.css';
 
-Vue.config.productionTip = false
+Vue.use(Vuetify);
 
-new Vue({
+const vuetify = new Vuetify();
+
+export default new Vue({
   vuetify,
   render: h => h(App)
-}).$mount('#app')
+  // ...otros componentes y configuraciones
+}).$mount('#app');

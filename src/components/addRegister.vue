@@ -1,5 +1,5 @@
 <template>
-  <div id="app" data-app> 
+  <div id="app" data-app>
     <v-dialog :value="mostrar" max-width="500px">
     <v-card>
       <v-card-title class="headline">Agregar Nuevo Registro de Asistencia</v-card-title>
